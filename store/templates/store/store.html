@@ -1,0 +1,189 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+
+
+            <div class="col-lg-8">
+                <p class="h4tslider"></p>
+                <button class="sliderbutton">View more</button>
+                <a href="#"> <img class="mySlides" style="z-index:-111;" class="thumbnail"
+                                  src="{% static 'images/images/laptop2.jpg' %}"></a>
+                <a href="#"> <img class="mySlides" style="z-index:-111;" class="thumbnail"
+                                  src="{% static 'images/images/mobile2.jpg' %}"></a>
+
+            </div>
+
+
+            <div class="col-lg-4">
+
+                <a href="#"> <img style="z-index:-111;" class="thumbnail"
+                                  src="{% static 'images/images/gamepad.jpg' %}"></a>
+
+                <a href="#"> <img style="z-index:-111;" class="thumbnail" src="{% static 'images/images/mouse.jpg' %}"></a>
+
+
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <div class="container">
+        <div class="row">
+
+
+            <div class="col-lg-6">
+                <p class="h3t"></p>
+                <button class="h1button">View more</button>
+                <img style="z-index:-111;" class="thumbnail" src="{% static 'images/images/ps5.jpg' %}">
+
+
+            </div>
+
+
+            <div class="col-lg-6">
+                <p class="h3t"></p>
+                <button class="h1button">View more</button>
+                <img style="z-index:-111;" class="thumbnail" src="{% static 'images/images/monitor.jpg' %}">
+
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <p class="h3t"></p>
+                <button class="h1button">View more</button>
+                <img style="z-index:-111;" class="thumbnail" src="{% static 'images/images/mobile3.jpg' %}">
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="row">
+
+
+            <div class="col-lg-3">
+                <div class="container9">
+
+                    <div class="link9"><a style="color:white; font-size:32px;" href="#"> Accesories</a></div>
+
+                    <div class="link9"><a style="color:white; font-size:22px;" href="#"> Camera</a></div>
+
+                    <div class="link9"><a style="color:white; font-size:22px;" href="#"> Mobile</a></div>
+
+                    <div class="link9"><a style="color:white; font-size:22px;" href="#"> images/laptop</a></div>
+
+                    <div class="link9"><a style="color:white; font-size:22px;" href="#"> Others</a></div>
+
+                </div>
+            </div>
+
+
+            {% for product in products %}
+                <div class="col-lg-3">
+                    <img style="z-index:-111;" class="thumbnail" src="{{ product.imageURL }}">
+                    <div class="box-element product">
+                        <h5><strong>{{ product.name }}</strong></h5>
+                        <hr>
+
+                        <button data-product="{{ product.id }}" data-action="add"
+                                class="btn btn-outline-secondary add-btn update-cart" id="hand1">Add to Cart
+                        </button>
+
+                        <a class="btn btn-outline-success" id="hand1"
+                           href="{% url 'product_view' product.id %}">View</a>
+                        <h5><strong>Price: {{ product.price|floatformat:2 }} Tk</strong></h5>
+                    </div>
+                </div>
+            {% endfor %}
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <p class="h3t"></p>
+                <button class="h1button" id="hand1">View more</button>
+                <img style="z-index:-111;" class="thumbnail" src="{% static 'images/images/laptop3.jpg' %}">
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-3">
+                <div class="container9">
+
+                    <div class="link9"><a style="color:white; font-size:32px;" href="#"> Accesories</a></div>
+
+                    <div class="link9"><a style="color:white; font-size:22px;" href="#"> Camera</a></div>
+
+                    <div class="link9"><a style="color:white; font-size:22px;" href="#"> Mobile</a></div>
+
+                    <div class="link9"><a style="color:white; font-size:22px;" href="#"> images/laptop</a></div>
+
+                    <div class="link9"><a style="color:white; font-size:22px;" href="#"> Others</a></div>
+
+                </div>
+            </div>
+
+            {% for product in products %}
+                <div class="col-lg-3">
+                    <img style="z-index:-111;" class="thumbnail" src="{{ product.imageURL }}">
+                    <div class="box-element product">
+                        <h5><strong>{{ product.name }}</strong></h5>
+                        <hr>
+
+                        <button data-product="{{ product.id }}" data-action="add"
+                                class="btn btn-outline-secondary add-btn update-cart" id="hand1">Add to Cart
+                        </button>
+
+                        <a class="btn btn-outline-success" id="hand1"
+                           href="{% url 'product_view' product.id %}">View</a>
+                        <h5><strong>Price: {{ product.price|floatformat:2 }} Tk</strong></h5>
+                    </div>
+                </div>
+            {% endfor %}
+
+
+        </div>
+    </div>
+
+{% endblock content %}

@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1"/>
+    <title>Businessland Ltd.</title>
+    <!-- add icon link -->
+
+    {#    <link rel="stylesheet" href="{% static 'css/product_page.css' %}">#}
+
+    {#css file start#}
+
+    <link href="{% static 'css/layout.css' %}" rel="stylesheet" type="text/css" media="all">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <!-- extra -->
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/css-main/open-iconic-bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/css-main/animate.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/css-main/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/css-main/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/css-main/magnific-popup.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/css-main/aos.css' %}">
+
+
+    <link rel="stylesheet" href="{% static 'css/css-main/ionicons.min.css' %} ">
+
+    <link rel="stylesheet" href="{% static 'css/css-main/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'css/css-main/jquery.timepicker.css' %}">
+
+
+    <link rel="stylesheet" href="{% static 'css/css-main/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/css-main/icomoon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/css-main/style.css' %}">
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    {% block css_block %}
+
+    {% endblock %}
+    <script type="text/javascript">
+        var user = '{{ request.user }}'
+
+        function getToken(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        var csrftoken = getToken('csrftoken');
+
+        function getCookie(name) {
+            // Split cookie string and get all individual name=value pairs in an array
+            var cookieArr = document.cookie.split(";");
+
+            // Loop through the array elements
+            for (var i = 0; i < cookieArr.length; i++) {
+                var cookiePair = cookieArr[i].split("=");
+
+                /* Removing whitespace at the beginning of the cookie name
+                and compare it with the given string */
+                if (name == cookiePair[0].trim()) {
+                    // Decode the cookie value and return
+                    return decodeURIComponent(cookiePair[1]);
+                }
+            }
+
+            // Return null if not found
+            return null;
+        }
+
+        var cart = JSON.parse(getCookie('cart'))
+
+        if (cart == undefined) {
+            cart = {}
+            console.log('Cart was Created!', cart)
+            document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
+        }
+        console.log('Cart:', cart)
+    </script>
+</head>
+<body>
+
+
+<div class="wrapper row0">
+    <div id="topbar" class="">
+
+        <div style="float: left !important" class="fl_left">
+            <div id="logo" class="fl_left">
+                <h1 style="left: 10px; margin-left: 10rem;"><a href="{% url 'store' %}"><img style="width:70px;" src="{% static 'images/businessland_logo.png' %}" alt=""></a></h1>
+
+
+            </div>
+
+
+            <br>
+        </div>
+        <div class="">
+            <ul class="">
+                <input type="text" name="" size="38"
+                       style="height:30px;font-size:14pt;margin-left: 4rem;margin-right: 2rem;"
+                       placeholder="Search Your Products " name="search" id="search">
+                <li><a href="#"><i class="fa fa-lg fa-home fa-2x"></i><span id="home">Home</span></a></li>
+
+                <li><a href="#"><i class="fa fa-heart fa-2x"></i><span id="heart">Heart</span></a></li>
+
+                <li><a href="{% url 'cart' %}"><i class="fa fa-shopping-cart fa-2x"></i><p style="font-weight: bold; font-size: 20px; float: right; color: white" id="cart-total">{{ cartItems }}</p> <span id="cart">Cart</span></a></li>
+
+                <li><a href="{% url 'login' %}">Login</a></li>
+                <li><a href="{% url 'register' %}">Register</a></li>
+            </ul>
+        </div>
+
+
+    </div>
+    <br><br>
+</div>
+
+<nav class="headersticky" id="myheader1"><a href="#"><i class="fa fa-bars fa-2x"></i></a>
+    <ul id="header_wrap">
+
+
+        <li><a class="nav-link dropdown-toggle" z-index='100' href="#">Desktop</a>
+            <ul>
+                <li><a class="nav-link dropdown-toggle" href="#">sous menu 2</a>
+                    <ul>
+                        <li><a href="#">sous sous sous menu 1 </a></li>
+                        <li><a href="#">sous sous sous menu 1</a></li>
+                        <li><a href="#">sous sous sous menu 1</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">sous menu 2</a></li>
+            </ul>
+        </li>
+
+
+        <li><a class="nav-link dropdown-toggle" href="#">Software</a>
+            <ul>
+                <li><a class="nav-link dropdown-toggle" href="#">sous menu 2</a>
+                    <ul>
+                        <li><a href="#">sous sous sous menu 1 </a></li>
+                        <li><a href="#">sous sous sous menu 1</a></li>
+                        <li><a href="#">sous sous sous menu 1</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">sous menu 2</a></li>
+            </ul>
+        </li>
+
+
+        <li><a class="nav-link dropdown-toggle" href="#">Camera</a>
+            <ul>
+                <li><a class="nav-link dropdown-toggle" href="#">sous menu 2</a>
+                    <ul>
+                        <li><a href="#">sous sous sous menu 1 </a></li>
+                        <li><a href="#">sous sous sous menu 1</a></li>
+                        <li><a href="#">sous sous sous menu 1</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">sous menu 2</a></li>
+            </ul>
+        </li>
+
+        <li><a class="nav-link dropdown-toggle" href="#">Mobile</a>
+            <ul>
+                <li><a class="nav-link dropdown-toggle" href="#">sous menu 2</a>
+                    <ul>
+                        <li><a href="#">sous sous sous menu 1 </a></li>
+                        <li><a href="#">sous sous sous menu 1</a></li>
+                        <li><a href="#">sous sous sous menu 1</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">sous menu 2</a></li>
+            </ul>
+        </li>
+
+
+        <li><a class="nav-link dropdown-toggle" href="#">Others</a>
+            <ul>
+                <li><a class="nav-link dropdown-toggle" href="#">sous menu 2</a>
+                    <ul>
+                        <li><a href="#">sous sous sous menu 1 </a></li>
+                        <li><a href="#">sous sous sous menu 1</a></li>
+                        <li><a href="#">sous sous sous menu 1</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">sous menu 2</a></li>
+            </ul>
+        </li>
+
+    </ul>
+</nav>
+
+
+{% block content %}
+
+{% endblock content %}
+
+<footer>
+    <div style="background-color: #34495E">
+        <div style=" padding-top: 0px;padding-bottom: 0px;" class="container">
+            <div class="footer-cta pt-5 pb-5">
+                <div class="row">
+                    <div class="col-xl-4 col-md-4 mb-30">
+                        <div class="single-cta">
+                            <i class="fa fa-map"></i>
+                            <div class="cta-text">
+                                <h4 style="color: #1b99e9">Find us</h4>
+                                <span>BCS Computer City. SGR-23 (Ground Floor), <br>IDB Bhaban, E/8-A, Rokeya Sharani <br>Sher-E-Bangla Nagar, Dhaka-1207</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-4 mb-30">
+                        <div class="single-cta">
+                            <i class="fa fa-phone"></i>
+                            <div class="cta-text">
+                                <h4 style="color: #1b99e9">Call us</h4>
+                                <span>01730067504 or 01730067506</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-4 mb-30">
+                        <div class="single-cta">
+                            <i class="fa fa-envelope"></i>
+                            <div class="cta-text">
+                                <h4 style="color: #1b99e9">Mail us</h4>
+                                <span>info@businesslandbd.com</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-content pt-5 pb-5">
+                <div class="row">
+                    <div class="col-xl-4 col-lg-4 mb-50">
+                        <div class="footer-widget">
+                            <div class="footer-logo">
+                                <a href="index.html"><img style="height:60px; width:60px" src="{% static 'images/businessland_logo.png' %}" class="img-fluid"
+                                                          alt="logo"></a>
+                            </div>
+                            <div class="footer-text">
+                                <p>For Computer Sales, Service, Software Development & Networking Solution</p>
+                            </div>
+                            <div class="footer-social-icon">
+                                <span style="color:#1b99e9">Follow us</span>
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-google-plus"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6 mb-30">
+                        <div class="footer-widget">
+                            <div class="">
+                                <h3>Useful Links</h3>
+                            </div>
+                            <ul>
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">about</a></li>
+                                <li><a href="#">services</a></li>
+                                <li><a href="#">portfolio</a></li>
+                                <li><a href="#">Contact</a></li>
+                                <li><a href="#">About us</a></li>
+                                <li><a href="#">Our Services</a></li>
+                                <li><a href="#">Expert Team</a></li>
+                                <li><a href="#">Contact us</a></li>
+                                <li><a href="#">Latest News</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6 mb-50">
+                        <div class="footer-widget">
+                            <div class="">
+                                <h3>Subscribe</h3>
+                            </div>
+                            <div class="footer-text mb-25">
+                                <p>Don’t miss to subscribe to our new feeds, kindly fill the form below.</p>
+                            </div>
+                            <div class="subscribe-form">
+                                <form action="#">
+                                    <input type="text" placeholder="Email Address">
+                                    <button>Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copyright-text" style="text-align: center;   background-color: #141B52; padding: 10px;">
+        <p>Copyright &copy; 2021, All Right Reserved <a href="">BusinessLand</a></p>
+
+
+    </div>
+</footer>
+
+<script>
+    var search = "{% url 'search' %}";
+    var result = $('#result');
+    var searchField = $('#search').val();
+    var input_id = 'id_wallet';
+
+    $(function () {
+        function a(a) {
+            var b = this;
+            a.forEach(function (a) {
+                var c = $(a.toggle);
+                c.on("click", function () {
+                    c.hasClass("close") ? b.hide(a) : b.show(a)
+                })
+            })
+        }
+
+        function d(a) {
+            var b = this;
+            b.elm = a;
+            b.slides = [];
+            b.dots = [];
+            var c = $("<div>", {
+                "class": "slider-dot"
+            });
+            a.find(".mySlides").each(function (a, d) {
+                d = $(d);
+                b.slides[a] = d;
+                var e = $("<span>", {
+                    "class": "dot"
+                });
+                c.append(e);
+                b.dots[a] = e;
+                d.hide();
+                e.on("click", function () {
+                    b.showSlides(a)
+                })
+            });
+            a.append(c);
+            b.index = 0;
+            b.showSlides(0)
+        }
+
+        function c(a) {
+            var b = a.position
+                ,
+                c = '<a href="' + a.url + '"><img src="' + a.image + '" alt="' + a.title + '" class="img-responsive"></a>';
+            1 == b ? setTimeout(function () {
+                var a = new Popup(c);
+                a.render();
+                localStorage.showed = n;
+                setTimeout(function () {
+                    a.close()
+                }, 14E3)
+            }, 6E3) : $(".ads-pos-" + b).html(c)
+        }
+
+        var e = $("html")
+            , k = $("body")
+            , l = $(".overlay")
+            , h = a.prototype;
+        h.show = function (a) {
+            this.active && this.hide(this.active);
+            var b = $(a.target)
+                , c = $(a.toggle);
+            a.overlay && l.addClass("open");
+            a.no_scroll && $("body").addClass("no-scroll");
+            c.addClass("close");
+            b.addClass("open");
+            this.active = a
+        }
+        ;
+        h.hide = function (a) {
+            if (a = a || this.active) {
+                var b = $(a.target);
+                $(a.toggle).removeClass("close");
+                b.removeClass("open");
+                l.removeClass("open");
+                $("body").removeClass("no-scroll");
+                this.active = a
+            }
+        }
+        ;
+        var g = new a([{
+            toggle: "#nav-toggler",
+            target: "#main-nav",
+            overlay: !0,
+            no_scroll: !0
+        }, {
+            toggle: ".search-toggle",
+            target: ".search-wrap"
+        }, {
+            toggle: ".cart-toggler",
+            target: "#cart"
+        }, {
+            toggle: "#lc-toggle, .lc-close",
+            target: "#column-left",
+            overlay: !0,
+            no_scroll: !0
+        }]);
+        l.on("click", function () {
+            g.hide()
+        });
+        var q = $("#cart");
+        $(document).on("click", function (a) {
+            a = $(a.target);
+            0 === q.has(a).size() && g.active && ".cart-toggler" === g.active.toggle && g.hide();
+            a.data("dismiss") && a.parents("." + a.data("dismiss")).remove()
+        });
+        $(".has-child a").on("click", function (a) {
+            $(this).parent().toggleClass("open");
+            var b = $(a.target);
+            (isMobile() && b.is(".has-child > a") || b.is(".responsive-menu > .has-child > a")) && a.preventDefault()
+        });
+        "" == $(".category-description").text() && $(".category-description").remove();
+        window.addClearFix = function () {
+            var a = $("#column-right, #column-left").size();
+            2 == a ? $("#content .product-layout:nth-child(2n+2)").after('<div class="clearfix visible-md visible-sm"></div>') : 1 == a ? $("#content .product-layout:nth-child(3n+3)").after('<div class="clearfix visible-lg"></div>') : $("#content .product-layout:nth-child(4n+4)").after('<div class="clearfix"></div>')
+        }
+        ;
+        addClearFix();
+        var b = $("#list-view")
+            , f = $("#grid-view");
+        h = {
+            list: function () {
+                b.addClass("active");
+                f.removeClass("active");
+                $("#content .row > .product-layout").attr("class", "col-xs-12 col-md-12 product-layout list");
+                localStorage.setItem("display", "list")
+            },
+            grid: function () {
+                $(this).addClass("active");
+                $("#list-view").removeClass("active");
+                cols = $("#column-right, #column-left").size();
+                2 == cols ? $("#content .product-layout").attr("class", "col-xs-12 col-md-6 product-layout grid") : 1 == cols ? $("#content .product-layout").attr("class", "col-xs-12 col-md-4 product-layout grid") : $("#content .product-layout").attr("class", "col-xs-12 col-md-3 product-layout grid");
+                localStorage.setItem("display", "gird")
+            }
+        };
+        b.on("click", h.list);
+        f.on("click", h.grid);
+        b.size() && "list" === localStorage.getItem("display") && h.list();
+        d.prototype.showSlides = function (a) {
+            this.timer && clearTimeout(this.timer);
+            a >= this.slides.length && (a = 0);
+            this.slides[this.index].hide();
+            this.slides[a].show();
+            this.dots[this.index].removeClass("active");
+            this.dots[a].addClass("active");
+            this.index = a;
+            this.timer = setTimeout(this.showSlides.bind(this, ++a), 5E3)
+        }
+        ;
+        $(".banner-slider").each(function () {
+            new d($(this))
+        });
+        window.addEventListener("scroll", function () {
+            165 < e.scrollTop() ? k.addClass("on-scroll") : k.removeClass("on-scroll")
+        });
+        $(".to-top").on("click", function (a) {
+            a.preventDefault();
+            $("html").scrollTo(0, 600)
+        });
+        var n = (new Date).getTime();
+        h = localStorage.showed;
+        var m = localStorage.lastVisited
+            , p = [];
+        h = parseInt(h);
+        h = isNaN(h) ? null : h;
+        m = parseInt(m);
+        m = isNaN(m) ? null : m;
+        var t = app.popupDuration ? app.popupDuration : 12;
+        app.enablePopup && m && 36E4 > n - m && (!h || n - h > 36E5 * t) && p.push(1);
+        $(".ads").each(function () {
+            p.push($(this).attr("data-position"))
+        });
+        if (p.length) {
+            var r = "device_type=" + (isMobile() ? 1 : 3);
+            p.forEach(function (a) {
+                r += "&ads_position[]=" + a
+            });
+            $.ajax({
+                url: "api/ads",
+                data: r,
+                method: "post",
+                dataType: "json",
+                success: function (a) {
+                    a.forEach(function (a) {
+                        c(a)
+                    });
+                    (a = a[1]) && a.image && c(a.image, a.title, a.url)
+                }
+            })
+        }
+        h = (new Date).getHours();
+        9 <= h && 21 >= h && $(".svg-icon svg").show();
+        localStorage.lastVisited = n
+    });
+
+</script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+{#<script type="text/javascript" src="{% static 'js/product_page.js' %}"></script>#}
+<script type="text/javascript" src="{% static 'js/csrf.ajax.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery-ui.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/search.js' %}"></script>
+{#<script type="text/javascript" src="{% static 'js/product_page.js' %}"></script>#}
+
+
+<div class="jquery-script-ads" style="margin:30px auto;">
+    <script type="text/javascript"><!--
+
+    //-->
+
+
+    </script>
+    <script type="text/javascript"
+            src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+    </script>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+<script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-36251023-1']);
+    _gaq.push(['_setDomainName', 'jqueryscript.net']);
+    _gaq.push(['_trackPageview']);
+
+    (function () {
+        var ga = document.createElement('script');
+        ga.type = 'text/javascript';
+        ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+    })();
+
+</script>
+
+<script>
+    var myIndex = 0;
+    carousel();
+
+    function carousel() {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        myIndex++;
+        if (myIndex > x.length) {
+            myIndex = 1
+        }
+        x[myIndex - 1].style.display = "block";
+        setTimeout(carousel, 2000); // Change image every 2 seconds
+    }
+</script>
+
+
+<script>
+    window.onscroll = function () {
+        myFunction()
+    };
+
+    var headersticky = document.getElementById("myheader1");
+    var sticky = headersticky.offsetTop;
+
+    function myFunction() {
+        if (window.pageYOffset > sticky) {
+            headersticky.classList.add("sticky");
+        } else {
+            headersticky.classList.remove("sticky");
+        }
+    }
+</script>
+
+
+<script type="text/javascript">
+
+
+    //For Demo only
+    var links = document.getElementsByClassName('link9')
+    for (var i = 0; i <= links.length; i++)
+        addClass(i)
+
+
+    function addClass(id) {
+        setTimeout(function () {
+            if (id > 0) links[id - 1].classList.remove('hover')
+            links[id].classList.add('hover')
+        }, id * 750)
+    }
+</script>
+
+
+<a id="backtotop" href="#top"><i class="fa fa-chevron-up"></i></a>
+<!-- JAVASCRIPTS -->
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/jquery.backtotop.js' %}"></script>
+<script src="{% static 'js/jquery.mobilemenu.js' %}"></script>
+
+
+{% block js_block %}
+
+{% endblock %}
+
+</body>
+</html>
